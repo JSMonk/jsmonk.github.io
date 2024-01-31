@@ -10,7 +10,7 @@ tags: [OSS, TypeScript, Kotlin, wasm]
 
 At the beginning of 2019, I worked in a small outsourcing company called [WookieeLabs](https://github.com/wookieelabs). In most of the projects, we preferred to use [Flow](https://flow.org/) over the [TypeScript](https://www.typescriptlang.org/). There were a lot of benefits such as [nominal classes](https://flow.org/en/docs/lang/nominal-structural/#toc-classes-are-nominally-typed), [type variances](https://flow.org/en/docs/lang/variance), [opaque types](https://flow.org/en/docs/types/opaque-types/), [smooth integration with React](https://flow.org/en/docs/react/). But the main reason was that Flow in 2019 was just JavaScript with types.
 
-But the way Flow type inference works was not ideal:
+But the way Flow type inference was working in 2019 was not ideal:
 ```typescript
 const id = x => x;
 const a = id(2); // number | string
@@ -19,8 +19,10 @@ const b = id("string"); // number | string
 You can play with this example [here](https://flow.org/try/#1N4Igxg9gdgZglgcxALmAXwDTggEwKYrZQDOALgARw7kC85AHrQHwMDcAOlJCRQIa2UcACgBMASg5doZcgCMBVIexBkATnCgJlEkFgBueVcTjRCegAwA6AIwAOAKw2QaIA
 )
 
-So, Flow analyzes the usage of the function and, based on it, infers the type of a function.
-In the example above, we provided to the `id` function a number and a string, so, based on the usage, the tool infers the type of the `id` as `(x: number | string) => number | string`.
+So, Flow analyzed the usage of the function and, based on it, inferred the type of a function.
+In the example above, we provided to the `id` function a number and a string, so, based on the usage, the tool infered the type of the `id` as `(x: number | string) => number | string`.
+
+However, the Flow team did a significant job of fixing such behavior by requiring annotations in places where the tool knows it will not have a local typing context. You can read about it [here](https://medium.com/flow-type/local-type-inference-for-flow-aaa65d071347).
 
 At the same time, there was hype about the new "language" (syntax for [OCaml](https://ocaml.org/)) called [ReasonML](https://reasonml.github.io/) (today there is also an alternative project called [ReScript](https://rescript-lang.org/)). 
 
